@@ -1,23 +1,3 @@
-function Aria2DownLoad(Name, DLink, UA, Split, port) {
-    var Variable_WebSocket = new WebSocket('ws://localhost:' + port + '/jsonrpc');
-    Variable_WebSocket.onopen = function() {
-        Variable_WebSocket.send('{"jsonrpc":2,"id":"KinhWeb","method":"system.multicall","params":[[{"methodName":"aria2.addUri","params":[["' + DLink + '"],{"max-connection-per-server":"' + Split + '","split":"' + Split + '","out":"' + Name + '","user-agent":"' + UA + '","piece-length":"1M","allow-piece-length-change":"true"}]}]]}');
-    }
-    Variable_WebSocket.onclose = function() {
-        msg('error', 'aria2c未启动');
-    }
-
-    Variable_WebSocket.onerror = function() {
-        msg('error', '发送失败');
-    }
-
-    Variable_WebSocket.onmessage = function(e) {
-        if (e.data.indexOf('result') != -1) {
-            msg('error', '发送成功')
-        }
-    }
-}
-
 function getNum(str, firstStr, secondStr) {
     if (str == "" || str == null || str == undefined) {
         return "";
@@ -31,11 +11,7 @@ function getNum(str, firstStr, secondStr) {
 }
 
 function msg(type, text) {
-    if (type == 'error') {
-        document.getElementById('error').innerHTML = text;
-    } else {
-        document.getElementById(type + 'info').innerHTML = text;
-    }
+    document.getElementById(type + 'info').innerHTML = text;
     var ele = '#' + type;
     var elem = $(ele);
     if (elem.css('display') != 'none') return;
@@ -219,7 +195,7 @@ function getDlink(type) {
     var dlink = window.location.protocol + "//" + window.location.host + window.location.pathname + "api/down?fid=" + fid + '&m=.baidu.com';
     if (type == 'download') {
         window.open(dlink);
-        msg('error', '获取下载地址成功');
+        msg('ok', '获取下载地址成功');
     } else if (type == 'aria2c' || type == 'mo') {
         if (type == 'mo') {
             var port = 16800;
@@ -230,9 +206,9 @@ function getDlink(type) {
         }
     } else if (type == 'pot') {
         window.open('potplayer://' + dlink);
-        msg('error', '获取下载地址成功');
+        msg('ok', '获取下载地址成功');
     } else if(type == 'play'){
-        msg('error', '获取下载地址成功');
+        msg('ok', '获取下载地址成功');
         $('#loading').fadeOut(100);
         return dlink;
     } else {
@@ -242,7 +218,7 @@ function getDlink(type) {
         aux.select();
         document.execCommand("copy");
         document.body.removeChild(aux);
-        msg('error', '已复制到粘贴板');
+        msg('ok', '已复制到粘贴板');
     }
     $('#loading').fadeOut(100);
 }
@@ -252,9 +228,9 @@ function player() {
    var fid = document.getElementById('File_Fsid_' + num).getAttribute('value');
    var ft = document.getElementById('File_Type_' + num).getAttribute('value');
     var url = getDlink('play');
-    msg('error', '预览准备中...');
+    msg('loading', '预览准备中...');
     if (ft == 3) {
-        document.getElementById('playerinfo').innerHTML = '<img src="'+url+'" class="el-image-viewer__img" style="transform: scale(1) rotate(0deg) translate(0px, 0px); max-height: 100%; max-width: 100%;">';
+        document.getElementById('playerinfo').innerHTML = '<div class="el-image-viewer__mask"><div class="el-image-viewer__canvas"><img src="'+url+'" class="el-image-viewer__img" style="transform: scale(1) rotate(0deg) translate(0px, 0px); max-height: 100%; max-width: 100%;"></div></div>';
         $('#meue').fadeOut(100);
         $('#gallery').fadeIn(100)
     } else if (ft == 1 || ft ==2) {
