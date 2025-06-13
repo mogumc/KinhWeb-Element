@@ -3,12 +3,12 @@ A Template For KinhWeb
 
 ## 安装使用
   1.将文件放置到templates目录下  
-  2.在``config.yaml``文件下将主题修改到element-plus 
+  2.在``config.yaml``文件下将主题修改到element-plus  
   3.重启KinhWeb  
 
 ## 使用须知
-本主题依赖KinhWeb 1.0.0开发,请保证KinhWeb版本≥1.0.0
-本主题没有严格按照官方标准使用Vue开发,可能存在部分动效问题.
+本主题依赖KinhWeb 1.0.0开发,请保证KinhWeb版本≥1.0.0  
+本主题没有严格按照官方标准使用Vue开发,可能存在部分动效问题.  
 
 ## 功能
 ### V1.0.0版本
