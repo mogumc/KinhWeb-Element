@@ -14,6 +14,9 @@ A Template For KinhWeb
 ### V1.0.0版本
     1. 支持在线预览  
     2. 使用Element-plus组件库开发
+    
+### V1.0.1版本
+    1.修复静态资源问题  
 
 ## FaQ
 如果有任何使用问题请在群组[@KinhWeb](https://t.me/kinhweb)提出,或者在本仓库下提交Issue.  
